@@ -80,6 +80,22 @@ Resources:
         Variables:
           TABLE_NAME: !Ref Table
           TABLE_ARN: !GetAtt Table.Arn
+  tsFun:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-tsFun
+      Description: !Sub
+        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
+        - ResourceName: tsFun
+          RuntimeOption: true
+      CodeUri: src/tsFun
+      Handler: index.handler
+      Runtime: nodejs10.x
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Policies:
+        - AWSXrayWriteOnlyAccess
 Parameters:
   StackTagName:
     Type: String
