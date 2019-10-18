@@ -65,7 +65,7 @@ Resources:
       Description: !Sub
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
         - ResourceName: notTsFunction
-          RuntimeOption: false
+          RuntimeOption: true
       CodeUri: src/notTsFunction
       Handler: index.handler
       Runtime: nodejs10.x
