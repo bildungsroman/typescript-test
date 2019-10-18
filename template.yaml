@@ -8,6 +8,7 @@ Resources:
       Description: !Sub
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
         - ResourceName: tsFunction
+          RuntimeOption: true
       CodeUri: src/tsFunction
       Handler: index.handler
       Runtime: nodejs10.x
@@ -29,9 +30,10 @@ Resources:
       Description: !Sub
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
         - ResourceName: anotherTsFunction
+          RuntimeOption: true
       CodeUri: src/anotherTsFunction
       Handler: index.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs10.x
       MemorySize: 3008
       Timeout: 30
       Tracing: Active
