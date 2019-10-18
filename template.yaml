@@ -87,6 +87,7 @@ Resources:
       Description: !Sub
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
         - ResourceName: tsFun
+          RuntimeOption: true
       CodeUri: src/tsFun
       Handler: index.handler
       Runtime: nodejs10.x
@@ -95,6 +96,12 @@ Resources:
       Tracing: Active
       Policies:
         - AWSXrayWriteOnlyAccess
+        - DynamoDBCrudPolicy:
+            TableName: !Ref Table
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref Table
+          TABLE_ARN: !GetAtt Table.Arn
 Parameters:
   StackTagName:
     Type: String
