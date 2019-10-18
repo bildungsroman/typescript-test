@@ -87,7 +87,6 @@ Resources:
       Description: !Sub
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
         - ResourceName: tsFun
-          RuntimeOption: true
       CodeUri: src/tsFun
       Handler: index.handler
       Runtime: nodejs10.x
