@@ -106,6 +106,9 @@ Parameters:
   StackTagName:
     Type: String
     Description: Stack Name (injected by Stackery at deployment time)
+    Default:
+      name: myService
   EnvironmentTagName:
     Type: String
     Description: Environment Name (injected by Stackery at deployment time)
+    Default: dev
