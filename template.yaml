@@ -1,70 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
 Resources:
-  tsFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: !Sub ${AWS::StackName}-tsFunction
-      Description: !Sub
-        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
-        - ResourceName: tsFunction
-          RuntimeOption: true
-      CodeUri: src/tsFunction
-      Handler: index.handler
-      Runtime: nodejs10.x
-      MemorySize: 3008
-      Timeout: 30
-      Tracing: Active
-      Policies:
-        - AWSXrayWriteOnlyAccess
-        - DynamoDBCrudPolicy:
-            TableName: !Ref Table
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref Table
-          TABLE_ARN: !GetAtt Table.Arn
-  normalFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: !Sub ${AWS::StackName}-normalFunction
-      Description: !Sub
-        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
-        - ResourceName: normalFunction
-      CodeUri: src/normalFunction
-      Handler: index.handler
-      Runtime: nodejs10.x
-      MemorySize: 3008
-      Timeout: 30
-      Tracing: Active
-      Policies:
-        - AWSXrayWriteOnlyAccess
-        - DynamoDBCrudPolicy:
-            TableName: !Ref Table
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref Table
-          TABLE_ARN: !GetAtt Table.Arn
-  goFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: !Sub ${AWS::StackName}-goFunction
-      Description: !Sub
-        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
-        - ResourceName: goFunction
-      CodeUri: src/goFunction
-      Handler: main
-      Runtime: go1.x
-      MemorySize: 3008
-      Timeout: 30
-      Tracing: Active
-      Policies:
-        - AWSXrayWriteOnlyAccess
-        - DynamoDBCrudPolicy:
-            TableName: !Ref Table
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref Table
-          TABLE_ARN: !GetAtt Table.Arn
   Table:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -78,10 +14,3 @@ Resources:
       StreamSpecification:
         StreamViewType: NEW_AND_OLD_IMAGES
       TableName: !Sub ${AWS::StackName}-Table
-Parameters:
-  StackTagName:
-    Type: String
-    Description: Stack Name (injected by Stackery at deployment time)
-  EnvironmentTagName:
-    Type: String
-    Description: Environment Name (injected by Stackery at deployment time)
