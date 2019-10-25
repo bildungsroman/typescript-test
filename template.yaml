@@ -81,6 +81,29 @@ Resources:
           TABLE_ARN: !GetAtt Table.Arn
     Metadata:
       RuntimeOption: true
+  localTs:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-localTs
+      Description: !Sub
+        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
+        - ResourceName: localTs
+      CodeUri: src/localTs
+      Handler: index.handler
+      Runtime: nodejs10.x
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Policies:
+        - AWSXrayWriteOnlyAccess
+        - DynamoDBCrudPolicy:
+            TableName: !Ref Table
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref Table
+          TABLE_ARN: !GetAtt Table.Arn
+    Metadata:
+      RuntimeOption: true
 Parameters:
   StackTagName:
     Type: String
