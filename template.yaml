@@ -119,6 +119,8 @@ Resources:
       Tracing: Active
       Policies:
         - AWSXrayWriteOnlyAccess
+    Metadata:
+      RuntimeOption: typescript
 Parameters:
   StackTagName:
     Type: String
