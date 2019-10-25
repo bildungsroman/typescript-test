@@ -57,7 +57,7 @@ Resources:
           TABLE_NAME: !Ref Table
           TABLE_ARN: !GetAtt Table.Arn
     Metadata:
-      RuntimeOption: true
+      RuntimeOption: typescript
   reallyTsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -80,7 +80,7 @@ Resources:
           TABLE_NAME: !Ref Table
           TABLE_ARN: !GetAtt Table.Arn
     Metadata:
-      RuntimeOption: true
+      RuntimeOption: typescript
   localTs:
     Type: AWS::Serverless::Function
     Properties:
@@ -103,7 +103,7 @@ Resources:
           TABLE_NAME: !Ref Table
           TABLE_ARN: !GetAtt Table.Arn
     Metadata:
-      RuntimeOption: true
+      RuntimeOption: typescript
 Parameters:
   StackTagName:
     Type: String
