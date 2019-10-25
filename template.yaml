@@ -57,6 +57,23 @@ Resources:
         Variables:
           TABLE_NAME: !Ref Table
           TABLE_ARN: !GetAtt Table.Arn
+  yesTsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-yesTsFunction
+      Description: !Sub
+        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
+        - ResourceName: yesTsFunction
+      CodeUri: src/yesTsFunction
+      Handler: index.handler
+      Runtime: nodejs10.x
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Policies:
+        - AWSXrayWriteOnlyAccess
+    Metadata:
+      RuntimeOption: true
 Parameters:
   StackTagName:
     Type: String
