@@ -14,96 +14,6 @@ Resources:
       StreamSpecification:
         StreamViewType: NEW_AND_OLD_IMAGES
       TableName: !Sub ${AWS::StackName}-Table
-  normalFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: !Sub ${AWS::StackName}-normalFunction
-      Description: !Sub
-        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
-        - ResourceName: normalFunction
-      CodeUri: src/normalFunction
-      Handler: index.handler
-      Runtime: nodejs10.x
-      MemorySize: 3008
-      Timeout: 30
-      Tracing: Active
-      Policies:
-        - AWSXrayWriteOnlyAccess
-        - DynamoDBCrudPolicy:
-            TableName: !Ref Table
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref Table
-          TABLE_ARN: !GetAtt Table.Arn
-  tsFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: !Sub ${AWS::StackName}-tsFunction
-      Description: !Sub
-        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
-        - ResourceName: tsFunction
-      CodeUri: src/tsFunction
-      Handler: index.handler
-      Runtime: nodejs10.x
-      MemorySize: 3008
-      Timeout: 30
-      Tracing: Active
-      Policies:
-        - AWSXrayWriteOnlyAccess
-        - DynamoDBCrudPolicy:
-            TableName: !Ref Table
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref Table
-          TABLE_ARN: !GetAtt Table.Arn
-    Metadata:
-      RuntimeOption: typescript
-  reallyTsFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: !Sub ${AWS::StackName}-reallyTsFunction
-      Description: !Sub
-        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
-        - ResourceName: reallyTsFunction
-      CodeUri: src/reallyTsFunction
-      Handler: index.handler
-      Runtime: nodejs10.x
-      MemorySize: 3008
-      Timeout: 30
-      Tracing: Active
-      Policies:
-        - AWSXrayWriteOnlyAccess
-        - DynamoDBCrudPolicy:
-            TableName: !Ref Table
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref Table
-          TABLE_ARN: !GetAtt Table.Arn
-    Metadata:
-      RuntimeOption: typescript
-  localTs:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: !Sub ${AWS::StackName}-localTs
-      Description: !Sub
-        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
-        - ResourceName: localTs
-      CodeUri: src/localTs
-      Handler: index.handler
-      Runtime: nodejs10.x
-      MemorySize: 3008
-      Timeout: 30
-      Tracing: Active
-      Policies:
-        - AWSXrayWriteOnlyAccess
-        - DynamoDBCrudPolicy:
-            TableName: !Ref Table
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref Table
-          TABLE_ARN: !GetAtt Table.Arn
-    Metadata:
-      RuntimeOption: typescript
   yesTsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -119,6 +29,12 @@ Resources:
       Tracing: Active
       Policies:
         - AWSXrayWriteOnlyAccess
+        - DynamoDBCrudPolicy:
+            TableName: !Ref Table
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref Table
+          TABLE_ARN: !GetAtt Table.Arn
     Metadata:
       RuntimeOption: typescript
 Parameters:
