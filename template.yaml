@@ -104,6 +104,23 @@ Resources:
           TABLE_ARN: !GetAtt Table.Arn
     Metadata:
       RuntimeOption: typescript
+  yesTsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-yesTsFunction
+      Description: !Sub
+        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
+        - ResourceName: yesTsFunction
+      CodeUri: src/yesTsFunction
+      Handler: index.handler
+      Runtime: nodejs10.x
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Policies:
+        - AWSXrayWriteOnlyAccess
+    Metadata:
+      RuntimeOption: typescript
 Parameters:
   StackTagName:
     Type: String
