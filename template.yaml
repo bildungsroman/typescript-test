@@ -81,6 +81,23 @@ Resources:
           TABLE_ARN: !GetAtt Table.Arn
     Metadata:
       RuntimeOption: typescript
+  nope:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-nope
+      Description: !Sub
+        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
+        - ResourceName: nope
+      CodeUri: src/nope
+      Handler: index.handler
+      Runtime: nodejs8.10
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Policies:
+        - AWSXrayWriteOnlyAccess
+    Metadata:
+      RuntimeOption: typescript
 Parameters:
   StackTagName:
     Type: String
