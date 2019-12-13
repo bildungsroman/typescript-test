@@ -33,6 +33,23 @@ Resources:
         - AWSXrayWriteOnlyAccess
     Metadata:
       RuntimeOption: typescript
+  anotherTsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-anotherTsFunction
+      Description: !Sub
+        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
+        - ResourceName: anotherTsFunction
+      CodeUri: src/anotherTsFunction
+      Handler: index.handler
+      Runtime: nodejs12.x (typescript)
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Policies:
+        - AWSXrayWriteOnlyAccess
+    Metadata:
+      RuntimeOption: nodejs12.x (typescript)
 Parameters:
   StackTagName:
     Type: String
