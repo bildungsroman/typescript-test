@@ -41,13 +41,15 @@ Resources:
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
         - ResourceName: anotherTsFunction
       CodeUri: src/anotherTsFunction
-      Handler: handler.handler
-      Runtime: python3.8
+      Handler: index.handler
+      Runtime: nodejs12.x
       MemorySize: 3008
       Timeout: 30
       Tracing: Active
       Policies:
         - AWSXrayWriteOnlyAccess
+    Metadata:
+      RuntimeOption: typescript
 Parameters:
   StackTagName:
     Type: String
