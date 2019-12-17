@@ -50,6 +50,23 @@ Resources:
         - AWSXrayWriteOnlyAccess
     Metadata:
       RuntimeOption: typescript
+  newTsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-newTsFunction
+      Description: !Sub
+        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
+        - ResourceName: newTsFunction
+      CodeUri: src/newTsFunction
+      Handler: index.handler
+      Runtime: nodejs12.x
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Policies:
+        - AWSXrayWriteOnlyAccess
+    Metadata:
+      RuntimeOption: typescript
 Parameters:
   StackTagName:
     Type: String
