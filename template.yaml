@@ -1,21 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
 Resources:
-  normalFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: !Sub ${AWS::StackName}-normalFunction
-      Description: !Sub
-        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
-        - ResourceName: normalFunction
-      CodeUri: src/normalFunction
-      Handler: index.handler
-      Runtime: nodejs12.x
-      MemorySize: 3008
-      Timeout: 30
-      Tracing: Active
-      Policies:
-        - AWSXrayWriteOnlyAccess
   tsFunction12:
     Type: AWS::Serverless::Function
     Properties:
@@ -23,7 +8,7 @@ Resources:
       Description: !Sub
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
         - ResourceName: tsFunction12
-      CodeUri: src/tsFunction12
+      CodeUri: src/domain/tsFunction12
       Handler: index.handler
       Runtime: nodejs12.x
       MemorySize: 3008
@@ -40,7 +25,24 @@ Resources:
       Description: !Sub
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
         - ResourceName: tsFunction10
-      CodeUri: src/tsFunction10
+      CodeUri: src/domain/tsFunction10
+      Handler: index.handler
+      Runtime: nodejs12.x
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Policies:
+        - AWSXrayWriteOnlyAccess
+    Metadata:
+      RuntimeOption: typescript
+  moreTsFun:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-moreTsFun
+      Description: !Sub
+        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
+        - ResourceName: moreTsFun
+      CodeUri: src/domain/moreTsFun
       Handler: index.handler
       Runtime: nodejs12.x
       MemorySize: 3008
