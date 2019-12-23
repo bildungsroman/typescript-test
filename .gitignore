@@ -1,4 +1,4 @@
 .stackery
 .aws-sam
 .stackery-template.yaml
-node-modules/
+node-modules
